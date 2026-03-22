@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Yanshika</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('newspaper.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Title image */
+    .title { margin-top: 20px; }
+    .title img { width: 400px; height: auto; }
+
+    /* Frames */
+    .frames {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin: 30px 0;
+    }
+    .frame {
+      width: 340px;
+      height: 480px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    }
+    .frame1 { background: url('frame1.jpg') no-repeat center center; }
+    .frame2 { background: url('frame2.jpeg') no-repeat center center; }
+
+    /* Decorations */
+    .decorations {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+    .decorations img { position: absolute; }
+    .snoopy-flower { top: -50px; left: -80px; width: 180px; }
+    .snoopy-sleep { bottom: -40px; right: -80px; width: 180px; }
+    .woodstock { top: 50%; left: -100px; width: 120px; }
+    .star { top: 30px; right: 80px; width: 110px; }
+
+    /* Secret Letter */
+    .secret-letter { margin-top: 40px; text-align: center; }
+    #letterIcon {
+      font-size: 2.5em;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #letterIcon:hover { transform: scale(1.1); }
+    .secret-message {
+      display: none;
+      margin-top: 20px;
+      background: #fffbea;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      font-size: 1.2em;
+      animation: rollOut 1s ease forwards;
+      white-space: pre-wrap;
+    }
+    @keyframes rollOut {
+      from { transform: scale(0) rotate(0deg); opacity: 0; }
+      to { transform: scale(1) rotate(360deg); opacity: 1; }
+    }
+
+    /* Question Section */
+    .question {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+    .options {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .options button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .yes-btn { background: #4CAF50; color: white; }
+    .yes-btn:hover { background: #45a049; }
+    .no-btn { background: #f44336; color: white; }
+    .no-btn:hover { background: #da190b; }
+
+    /* Black screen for No option */
+    .black-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #sorryImage {
+      max-width: 80%;
+      height: auto;
+      opacity: 0;
+      transition: opacity 2.5s ease-in; /* fade-in effect */
+    }
+    .show-sorry #sorryImage {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Title image -->
+  <div class="title">
+    <img src="bday.png" alt="Happy Birthday">
+  </div>
+
+  <div class="decorations">
+    <img src="snoopy-flower.png" class="snoopy-flower" alt="Snoopy holding flower">
+    <img src="snoopy-sleep.png" class="snoopy-sleep" alt="Snoopy sleeping">
+    <img src="woodstock.png" class="woodstock" alt="Woodstock">
+    <img src="star.png" class="star" alt="Star">
+  </div>
+
+  <div class="frames">
+    <div class="frame frame1"></div>
+    <div class="frame frame2"></div>
+  </div>
+
+  <div class="secret-letter">
+    <div id="letterIcon">✉️</div>
+    <div class="secret-message" id="secretMessage"></div>
+  </div>
+
+  <!-- Question Section -->
+  <div class="question">Did u liked it??🧐</div>
+  <div class="options">
+    <button class="yes-btn" id="yesBtn">Yes. A lot</button>
+    <button class="no-btn" id="noBtn">Noo. Not at all</button>
+  </div>
+
+  <!-- Black screen for No option -->
+  <div class="black-screen" id="blackScreen">
+    <img src="sorry.png" alt="Sorry" id="sorryImage">
+  </div>
+
+  <script>
+    const letterIcon = document.getElementById("letterIcon");
+    const secretMessage = document.getElementById("secretMessage");
+
+    const messageText = `Yawiii💝,
+Yanshika a very Happy Birthday 💖, aapka din bohot acha jay..
+I just want to say Thank u soo muchh💗 for everything... for being there, for all your support, basically everything. 
+I just pray aapko kabhi kisi ki nazar na lage na apki khushiyo ko nazar na lage 🧿🧿.
+Thank uu soo muchhh 💖 You are the bestt.`;
+
+    function typeMessage(text, element, speed = 50) {
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    letterIcon.addEventListener("click", () => {
+      secretMessage.style.display = "block";
+      secretMessage.textContent = "";
+      typeMessage(messageText, secretMessage, 50);
+    });
+
+    // Question buttons
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const blackScreen = document.getElementById("blackScreen");
+
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "https://www.example.com"; // replace with your desired site
+    });
+
+    noBtn.addEventListener("click", () => {
+      document.body.innerHTML = ""; // clear everything
+      document.body.appendChild(blackScreen);
+      blackScreen.style.display = "flex";
+
+      // trigger fade-in of sorry image
+      setTimeout(() => {
+        blackScreen.classList.add("show-sorry");
+      }, 100);
+    });
+  </script>
+</body>
+</html>
+
